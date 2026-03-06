@@ -35,17 +35,25 @@ Manually add `--remote-debugging-port=9222` to the shortcut target.
 
 #### 2. Install the Extension
 
+**Option A: Download from Release (recommended)**
+
+1. Go to [Releases](../../releases) → Download `antigravity-auto-accept-x.x.x.vsix`
+2. `Ctrl+Shift+P` → `Extensions: Install from VSIX...` → Select the `.vsix` file
+
+**Option B: Build from source**
+
 ```bash
+git clone https://github.com/git-buster/antigravity-auto-accept.git
+cd antigravity-auto-accept
 npm install
 npx @vscode/vsce package --allow-missing-repository --skip-license
 ```
 
-`Ctrl+Shift+P` → `Extensions: Install from VSIX...` → Select the `.vsix` file
+Then `Ctrl+Shift+P` → `Extensions: Install from VSIX...` → Select the generated `.vsix` file
 
 #### ⚠️ Important
 
 - **Do not install other auto-accept extensions** (e.g. `pesosz`) — they will conflict
-- Do **not** package with `--no-dependencies`, or the `ws` module will be missing
 - **Security tip**: Set **Terminal Command Auto Execution** to **Request Review** in Antigravity settings for double protection
 
 ### 📋 Usage
@@ -138,17 +146,25 @@ If you encounter any issues or have suggestions, please submit feedback on [GitH
 
 #### 2. 安装插件
 
+**方式 A：从 Release 下载（推荐）**
+
+1. 前往 [Releases](../../releases) → 下载 `antigravity-auto-accept-x.x.x.vsix`
+2. `Ctrl+Shift+P` → `Extensions: Install from VSIX...` → 选择 `.vsix` 文件
+
+**方式 B：从源码构建**
+
 ```bash
+git clone https://github.com/git-buster/antigravity-auto-accept.git
+cd antigravity-auto-accept
 npm install
 npx @vscode/vsce package --allow-missing-repository --skip-license
 ```
 
-`Ctrl+Shift+P` → `Extensions: Install from VSIX...` → 选择 `.vsix`
+然后 `Ctrl+Shift+P` → `Extensions: Install from VSIX...` → 选择生成的 `.vsix` 文件
 
 #### ⚠️ 注意
 
 - **不要同时安装其他 auto-accept 插件**（如 `pesosz` 的），会冲突
-- 打包时**不要**加 `--no-dependencies`，否则 `ws` 模块不会被包含
 - **安全建议**：在 Antigravity 设置中将 **Terminal Command Auto Execution** 设为 **Request Review**，配合本插件的黑名单可以双重保护
 
 ### 📋 使用
