@@ -37,7 +37,7 @@ Manually add `--remote-debugging-port=9222` to the shortcut target.
 
 **Option A: Download from Release (recommended)**
 
-1. Go to [Releases](../../releases) → Download `antigravity-auto-accept-x.x.x.vsix`
+1. Go to [Releases](https://github.com/git-buster/antigravity-auto-accept/releases) → Download the latest `.vsix`
 2. `Ctrl+Shift+P` → `Extensions: Install from VSIX...` → Select the `.vsix` file
 
 **Option B: Build from source**
@@ -115,7 +115,7 @@ Configure in `settings.json` (`Ctrl+,` → search `autoAccept`).
 
 ### 💬 Feedback
 
-If you encounter any issues or have suggestions, please submit feedback on [GitHub Issues](../../issues). Thank you for your support!
+If you encounter any issues or have suggestions, please submit feedback on [GitHub Issues](https://github.com/git-buster/antigravity-auto-accept/issues). Thank you for your support!
 
 ---
 
@@ -148,7 +148,7 @@ If you encounter any issues or have suggestions, please submit feedback on [GitH
 
 **方式 A：从 Release 下载（推荐）**
 
-1. 前往 [Releases](../../releases) → 下载 `antigravity-auto-accept-x.x.x.vsix`
+1. 前往 [Releases](https://github.com/git-buster/antigravity-auto-accept/releases) → 下载最新的 `.vsix` 文件
 2. `Ctrl+Shift+P` → `Extensions: Install from VSIX...` → 选择 `.vsix` 文件
 
 **方式 B：从源码构建**
@@ -226,4 +226,4 @@ npx @vscode/vsce package --allow-missing-repository --skip-license
 
 ### 💬 问题反馈
 
-如果你遇到任何问题或有建议，请在 [GitHub Issues](../../issues) 中提交反馈，感谢你的支持！
+如果你遇到任何问题或有建议，请在 [GitHub Issues](https://github.com/git-buster/antigravity-auto-accept/issues) 中提交反馈，感谢你的支持！
