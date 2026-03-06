@@ -2,7 +2,7 @@
   "name": "auto-accept-run-terminal",
   "displayName": "Antigravity Auto Accept & Run Terminal 自动接受",
   "description": "自动接受 Antigravity Agent 的文件改动、命令执行和权限弹窗，内置高危命令黑名单保护。",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "publisher": "gitbuster",
   "repository": {
     "type": "git",
