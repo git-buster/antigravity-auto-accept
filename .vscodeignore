@@ -1,0 +1,5 @@
+.vscode/**
+.vscode-test/**
+start-antigravity-cdp.bat
+.gitignore
+package-lock.json
