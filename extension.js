@@ -46,6 +46,31 @@ const I18N = {
     sbClickSettings: '点击打开设置',
     sbCdpDisconn: '未连接（重连中...）',
     warnStopped: '⚠️ Auto Accept 检测到高危命令，已自动停止插件。请在状态栏重新开启。',
+    helpTitle: '📖 使用说明',
+    helpCritical: '⚠️ 重要注意事项',
+    helpCritical1: '必须打开 <b>Agent Manager</b> 窗口（不是侧边栏的 Toggle Agent），终端命令的自动 Run / Reject 才能工作。',
+    helpCritical2: 'Agent Manager 中必须<b>切换到对应的聊天窗口</b>，插件才能检测到该会话的命令按钮。',
+    helpCritical3: 'Agent Manager 窗口<b>不能关闭</b>，否则 CDP 连接断开，自动执行失效。',
+    helpCritical4: '启动 Antigravity 时必须添加参数 <code>--remote-debugging-port=9222</code>，否则 CDP 无法连接。',
+    helpFeatures: '✨ 功能介绍',
+    helpFeature1: '<b>自动接受文件改动</b> — Agent 修改文件后自动切换到对应 tab 并点击 Accept，无需手动操作。',
+    helpFeature2: '<b>自动执行终端命令</b> — Agent 请求运行命令时自动点击 Run / Allow / Allow Once 按钮。',
+    helpFeature3: '<b>高危命令黑名单</b> — 内置 110+ 条规则，自动拦截 rm -rf、格式化磁盘、数据库删除等危险操作。',
+    helpFeature4: '<b>多目标 CDP 连接</b> — 同时连接侧边栏 Agent 面板和 Agent Manager，状态栏显示 CDP x2 表示双连接正常。',
+    helpBl: '🛡️ 黑名单模式说明',
+    helpBlReject: '<b>🔴 主动拒绝 (Reject)</b> — 检测到危险命令时自动点击 Reject 按钮拦截。插件继续运行，后续命令照常监控。适合挂机无人值守场景。',
+    helpBlStop: '<b>🛑 停止插件 (Stop)</b> — 检测到危险命令时不点击任何按钮，插件自动关闭总开关，等待你手动确认。适合需要人工审核的场景。',
+    helpStatus: '📊 状态栏含义',
+    helpStatus1: '<code>✓ ON | CDP x2</code> — ✅ 正常运行，双面板连接',
+    helpStatus3: '<code>✓ ON | CDP x1</code> — ⚠️ 只连了 1 个面板（打开 Toggle Agent 即可变 x2）',
+    helpStatus4: '<code>⚠ ON | CDP Disconnected</code> — ❌ CDP 未连接，检查启动参数',
+    helpStatus5: '<code>✕ OFF</code> — 插件已关闭',
+    helpLinks: '🔗 链接',
+    helpGithub: '📦 GitHub 仓库',
+    helpFeedback: '💬 问题反馈 / 建议',
+    welcomeMsg: '🎉 Auto Accept 插件已安装！请点击右下角状态栏打开设置面板，查看「📖 使用说明」了解重要注意事项。',
+    welcomeOk: '知道了',
+    welcomeNever: '知道了，不再提示',
   },
   en: {
     masterSwitch: 'Master Switch', masterTip: 'Toggle plugin on/off',
@@ -64,6 +89,31 @@ const I18N = {
     sbClickSettings: 'Click to open settings',
     sbCdpDisconn: 'Disconnected (reconnecting...)',
     warnStopped: '⚠️ Auto Accept detected a dangerous command and stopped. Re-enable from the status bar.',
+    helpTitle: '📖 User Guide',
+    helpCritical: '⚠️ Important Notes',
+    helpCritical1: 'You must open <b>Agent Manager</b> (not the sidebar Toggle Agent) for terminal auto Run / Reject to work.',
+    helpCritical2: 'In Agent Manager, you must <b>switch to the corresponding chat window</b> so the plugin can detect command buttons for that session.',
+    helpCritical3: '<b>Do not close</b> the Agent Manager window — closing it breaks the CDP connection and disables auto execution.',
+    helpCritical4: 'Launch Antigravity with <code>--remote-debugging-port=9222</code> parameter, otherwise CDP cannot connect.',
+    helpFeatures: '✨ Features',
+    helpFeature1: '<b>Auto Accept Files</b> — Automatically switches to the modified file tab and clicks Accept when Agent changes files.',
+    helpFeature2: '<b>Auto Run Terminal</b> — Automatically clicks Run / Allow / Allow Once when Agent requests to execute commands.',
+    helpFeature3: '<b>Dangerous Command Blacklist</b> — 110+ built-in rules that block rm -rf, disk format, database drops and other dangerous operations.',
+    helpFeature4: '<b>Multi-target CDP</b> — Connects to both sidebar Agent panel and Agent Manager. Status bar shows CDP x2 when both are connected.',
+    helpBl: '🛡️ Blacklist Modes',
+    helpBlReject: '<b>🔴 Reject</b> — Auto-clicks the Reject button to block the dangerous command. The plugin <b>continues running</b> and keeps monitoring. Ideal for unattended/overnight use.',
+    helpBlStop: '<b>🛑 Stop Plugin</b> — Does not click any button. The plugin <b>automatically turns OFF</b> and waits for manual review. Ideal when human oversight is preferred.',
+    helpStatus: '📊 Status Bar Guide',
+    helpStatus1: '<code>✓ ON | CDP x2</code> — ✅ Running normally, both panels connected',
+    helpStatus2: '<code>✓ ON | CDP x1</code> — ⚠️ Only 1 panel connected (open Toggle Agent to get x2)',
+    helpStatus3: '<code>⚠ ON | CDP Disconnected</code> — ❌ CDP not connected, check launch parameters',
+    helpStatus4: '<code>✕ OFF</code> — Plugin is disabled',
+    helpLinks: '🔗 Links',
+    helpGithub: '📦 GitHub Repository',
+    helpFeedback: '💬 Feedback / Suggestions',
+    welcomeMsg: '🎉 Auto Accept installed! Click the status bar (bottom right) to open Settings, and check the "📖 User Guide" for important usage notes.',
+    welcomeOk: 'OK',
+    welcomeNever: 'OK, Don\'t Show Again',
   }
 };
 function t(key) { return (I18N[language] || I18N.zh)[key] || key; }
@@ -106,9 +156,36 @@ function activate(context) {
 
   updateStatusBar();
   statusBarItem.show();
+
+  // 首次安装 / 更新后弹出欢迎通知
+  showWelcomeIfNeeded(context);
 }
 
 function deactivate() { stop(); }
+
+// ---------------------------------------------------------------------------
+// 首次安装 / 更新后弹出欢迎通知
+// ---------------------------------------------------------------------------
+function showWelcomeIfNeeded(context) {
+  const currentVersion = require('./package.json').version;
+  const dismissedVersion = context.globalState.get('welcomeDismissedVersion', '');
+
+  // 用户对当前版本点过"不再提示" → 不弹
+  if (dismissedVersion === currentVersion) return;
+
+  vscode.window.showInformationMessage(
+    t('welcomeMsg'),
+    t('welcomeOk'),
+    t('welcomeNever')
+  ).then(choice => {
+    if (choice === t('welcomeNever')) {
+      // 存当前版本号 → 本版本不再弹，更新后版本号变化会重新弹
+      context.globalState.update('welcomeDismissedVersion', currentVersion);
+      log('Welcome dismissed for version ' + currentVersion);
+    }
+    // 点 OK 或关闭 → 不存任何东西 → 下次启动继续弹
+  });
+}
 
 // ---------------------------------------------------------------------------
 // 启动 / 停止
@@ -710,7 +787,8 @@ function getSettingsHtml(connCount) {
     background: var(--vscode-sideBar-background, var(--vscode-editor-background));
     border: 1px solid var(--vscode-widget-border, rgba(255,255,255,0.12));
     border-radius: 8px;
-    width: 380px;
+    width: 460px;
+    max-width: 95vw;
     box-shadow: 0 8px 32px rgba(0,0,0,0.4);
     overflow: hidden;
   }
@@ -802,6 +880,47 @@ function getSettingsHtml(connCount) {
   .badge-on { background: rgba(40,167,69,0.2); color: #4ec96b; }
   .badge-off { background: rgba(220,53,69,0.2); color: #f56c6c; }
   .badge-cdp { background: rgba(0,123,255,0.15); color: var(--vscode-textLink-foreground); margin-left: 6px; }
+  .help-toggle {
+    display: flex; align-items: center; justify-content: space-between;
+    cursor: pointer; padding: 8px 0; user-select: none;
+  }
+  .help-toggle-title {
+    font-weight: 600; font-size: 13px;
+    color: var(--vscode-textLink-foreground);
+  }
+  .help-toggle-arrow {
+    font-size: 11px; color: var(--vscode-descriptionForeground);
+    transition: transform 0.2s;
+  }
+  .help-toggle-arrow.open { transform: rotate(90deg); }
+  .help-content {
+    display: none; padding: 0 0 8px 0;
+  }
+  .help-content.open { display: block; }
+  .help-section {
+    margin-bottom: 12px;
+  }
+  .help-section-title {
+    font-weight: 600; font-size: 12px; margin-bottom: 6px;
+    color: var(--vscode-foreground);
+  }
+  .help-item {
+    font-size: 12px; line-height: 1.6;
+    color: var(--vscode-descriptionForeground);
+    padding: 3px 0 3px 12px;
+    border-left: 2px solid var(--vscode-widget-border, rgba(255,255,255,0.1));
+    margin-bottom: 4px;
+  }
+  .help-item b { color: var(--vscode-foreground); }
+  .help-item code {
+    background: var(--vscode-textCodeBlock-background, rgba(255,255,255,0.06));
+    padding: 1px 5px; border-radius: 3px; font-size: 11px;
+    font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace;
+  }
+  .help-item.warn {
+    border-left-color: #e6a700;
+    color: var(--vscode-foreground);
+  }
 </style>
 </head>
 <body>
@@ -855,6 +974,45 @@ function getSettingsHtml(connCount) {
       <div class="link-row"><a class="link" onclick="send('openBlacklist')">${t('blSettings')}</a></div>
       <div class="link-row"><a class="link" onclick="send('showStatus')">${t('showStatus')}</a></div>
       <div class="link-row"><a class="link" onclick="send('diagnose')">${t('diagnose')}</a></div>
+      <hr class="divider">
+      <div class="help-toggle" onclick="toggleHelp()">
+        <span class="help-toggle-title">${t('helpTitle')}</span>
+        <span class="help-toggle-arrow" id="helpArrow">▶</span>
+      </div>
+      <div class="help-content" id="helpContent">
+        <div class="help-section">
+          <div class="help-section-title">${t('helpCritical')}</div>
+          <div class="help-item warn">${t('helpCritical1')}</div>
+          <div class="help-item warn">${t('helpCritical2')}</div>
+          <div class="help-item warn">${t('helpCritical3')}</div>
+          <div class="help-item">${t('helpCritical4')}</div>
+        </div>
+        <div class="help-section">
+          <div class="help-section-title">${t('helpFeatures')}</div>
+          <div class="help-item">${t('helpFeature1')}</div>
+          <div class="help-item">${t('helpFeature2')}</div>
+          <div class="help-item">${t('helpFeature3')}</div>
+          <div class="help-item">${t('helpFeature4')}</div>
+        </div>
+        <div class="help-section">
+          <div class="help-section-title">${t('helpBl')}</div>
+          <div class="help-item">${t('helpBlReject')}</div>
+          <div class="help-item">${t('helpBlStop')}</div>
+        </div>
+        <div class="help-section">
+          <div class="help-section-title">${t('helpStatus')}</div>
+          <div class="help-item">${t('helpStatus1')}</div>
+          <div class="help-item">${t('helpStatus2')}</div>
+          <div class="help-item">${t('helpStatus3')}</div>
+          <div class="help-item">${t('helpStatus4')}</div>
+          <div class="help-item">${t('helpStatus5')}</div>
+        </div>
+        <div class="help-section">
+          <div class="help-section-title">${t('helpLinks')}</div>
+          <div class="help-item"><a class="link" href="https://github.com/git-buster/antigravity-auto-accept" target="_blank">${t('helpGithub')}</a></div>
+          <div class="help-item"><a class="link" href="https://github.com/git-buster/antigravity-auto-accept/issues" target="_blank">${t('helpFeedback')}</a></div>
+        </div>
+      </div>
     </div>
   </div>
   <script>
@@ -863,6 +1021,12 @@ function getSettingsHtml(connCount) {
     const autoRunTerminal = ${autoRunTerminal};
     const blacklistAction = '${blacklistAction}';
     function send(type, value) { vscode.postMessage({ type, value }); }
+    function toggleHelp() {
+      const c = document.getElementById('helpContent');
+      const a = document.getElementById('helpArrow');
+      const open = c.classList.toggle('open');
+      a.classList.toggle('open', open);
+    }
   </script>
 </body>
 </html>`;

@@ -3,7 +3,7 @@
 > [English](#english) | [中文](#中文)
 
 <p align="center">
-  <img src="settings-panel.png" alt="Settings Panel" width="380">
+  <img src="settings-panel.png" alt="Settings Panel" width="460">
 </p>
 
 **Tired of clicking "Run", "Accept All", "Allow" hundreds of times a day?** Let this plugin handle it for you — automatically accept file changes, execute terminal commands, and approve permission dialogs while you focus on what matters.
@@ -32,6 +32,8 @@
 - ⚙️ **Settings Panel** — Fine-grained control for File Accept, Terminal Run, Blacklist behavior
 - 🌐 **Bilingual UI** — Settings panel supports English / 中文
 - 🔄 **Race Condition Protection** — Auto retry when command text hasn't rendered yet
+- 🎉 **Welcome Guide** — First-run notification guides you to the built-in User Guide
+- 📖 **Built-in User Guide** — Collapsible help section in Settings with usage notes, feature explanations, and links
 
 ### 🚀 Installation
 
@@ -69,10 +71,18 @@ Then `Ctrl+Shift+P` → `Extensions: Install from VSIX...` → Select the genera
 Terminal auto Run/Reject **requires Agent Manager**:
 
 1. Open **Agent Manager** (not the sidebar Toggle Agent)
-2. Enter commands in Agent Manager for the Agent to execute
-3. **Keep Agent Manager open** — closing it breaks CDP connection
+2. **Switch to the corresponding chat window** in Agent Manager — the plugin can only detect command buttons for the active session
+3. Enter commands in Agent Manager for the Agent to execute
+4. **Keep Agent Manager open** — closing it breaks CDP connection
 
 > Status bar shows `CDP x2` when both Agent Manager and Toggle Agent are connected.
+
+#### 🎉 First-Run Notification
+
+After installing or updating, a notification will appear guiding you to the **📖 User Guide** in the Settings panel.
+
+- Click **OK** → Notification will appear again next launch
+- Click **OK, Don't Show Again** → Won't show for this version (will reappear after the next update)
 
 #### Settings Panel
 
@@ -147,6 +157,8 @@ If you encounter any issues or have suggestions, please submit feedback on [GitH
 - ⚙️ **弹出设置菜单** — 细分控制文件 Accept、终端 Run、黑名单行为
 - 🌐 **中英文双语** — 设置面板可切换语言
 - 🔄 **防竞态机制** — 命令文本未渲染完时自动重试，避免绕过黑名单
+- 🎉 **首次使用引导** — 安装或更新后弹出通知，引导查看内置使用说明
+- 📖 **内置使用说明** — 设置面板内可折叠的帮助区，包含注意事项、功能介绍、黑名单模式说明
 
 ### 🚀 安装
 
@@ -184,10 +196,18 @@ npx @vscode/vsce package --allow-missing-repository --skip-license
 终端命令的自动 Run/Reject 功能**必须通过 Agent Manager 窗口**运行：
 
 1. 打开 **Agent Manager**（不是侧边栏的 Toggle Agent）
-2. 在 Agent Manager 中输入命令让 Agent 执行
-3. **Agent Manager 窗口不能关闭**，否则 CDP 连接会断开，自动执行失效
+2. **切换到对应的聊天窗口** — 插件只能检测当前活跃会话的命令按钮
+3. 在 Agent Manager 中输入命令让 Agent 执行
+4. **Agent Manager 窗口不能关闭**，否则 CDP 连接会断开，自动执行失效
 
 > 状态栏显示 `CDP x2` 表示 Agent Manager 和 Toggle Agent 都已连接。
+
+#### 🎉 首次使用提示
+
+安装或更新后会弹出通知，引导你到设置面板查看 **📖 使用说明**。
+
+- 点击 **知道了** → 下次启动仍会提示
+- 点击 **知道了，不再提示** → 当前版本不再弹出（更新后会重新提示）
 
 #### 设置菜单
 
