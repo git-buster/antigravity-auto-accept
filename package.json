@@ -4,6 +4,10 @@
   "description": "自动接受 Antigravity Agent 的文件改动、命令执行和权限弹窗，内置高危命令黑名单保护。",
   "version": "1.2.0",
   "publisher": "gitbuster",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/git-buster/antigravity-auto-accept"
+  },
   "icon": "icon.png",
   "engines": {
     "vscode": "^1.80.0"
