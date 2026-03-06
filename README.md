@@ -10,6 +10,12 @@
 
 💤 **Leave it running overnight** — your Agent keeps coding while you sleep. The built-in **110+ rule blacklist** ensures dangerous commands are automatically blocked, so you can trust it to work safely unattended.
 
+> ⚠️ **PLEASE READ THE USAGE GUIDE BELOW BEFORE USE!**
+> 
+> ⚠️ **使用前请务必阅读下方使用教程！**
+> 
+> ⚠️ **MUST READ! 必看！**
+
 ---
 
 ## English
@@ -102,8 +108,12 @@ Configure in `settings.json` (`Ctrl+,` → search `autoAccept`).
 
 > ⚠️ Values in settings.json **override** defaults (not merge).
 
-- **Reject**: Auto-click the Reject button, plugin continues running
-- **Stop Plugin**: Skip clicking, auto-disable the plugin
+**Blacklist Action Modes:**
+
+| Mode | Behavior |
+|------|----------|
+| 🔴 **Reject** | Auto-click the **Reject** button to block the dangerous command. The plugin **continues running** and will keep monitoring subsequent commands. |
+| 🛑 **Stop Plugin** | Skip clicking any button. The plugin **automatically turns OFF** the master switch and stops all automation, **waiting for manual intervention**. Use this mode if you want full human review after a dangerous command is detected. |
 
 ### 🔧 Troubleshooting
 
@@ -213,8 +223,12 @@ npx @vscode/vsce package --allow-missing-repository --skip-license
 
 > ⚠️ settings.json 的值**覆盖**默认值（不是合并）。
 
-- **主动拒绝 (Reject)**：自动点击 Reject 按钮，插件继续运行
-- **停止插件 (Stop)**：跳过不点击，自动关闭插件
+**黑名单触发模式：**
+
+| 模式 | 行为 |
+|------|------|
+| 🔴 **主动拒绝 (Reject)** | 自动点击 **Reject** 按钮拦截该危险命令。插件**继续运行**，后续命令仍会正常监控和执行。 |
+| 🛑 **停止插件 (Stop)** | 不点击任何按钮，插件**自动关闭总开关**，停止所有自动化操作，**等待人工干预**。适用于检测到危险命令后希望完全由人工接管的场景。 |
 
 ### 🔧 常见问题
 
